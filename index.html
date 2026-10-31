@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roséline | Fleurs & Coffrets</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:ital,wght@0,200..700;1,200..700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..800;1,6..96,400..800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        plumDark: '#4A1224',
+                        plumMedium: '#6B1B36',
+                        plumSoft: '#8C2B4B',
+                        rosePowder: '#F9ECE8',
+                        roseLight: '#F3DDD6',
+                        roseAccent: '#D89B93',
+                        roseGold: '#E4B5AC',
+                        goldChampagne: '#D4AF37',
+                        goldWarm: '#C5A059',
+                        luxuryDark: '#2A1A1E',
+                        softSilk: '#FDF8F6'
+                    },
+                    fontFamily: {
+                        pinyon: ['"Pinyon Script"', 'cursive'],
+                        bodoni: ['"Bodoni Moda"', 'serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        garamond: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        
+        /* Custom Shimmering Marquee Header */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #FFFFFF 0%, #F3DDD6 25%, #FFD700 50%, #F3DDD6 75%, #FFFFFF 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            animation: shimmer 5s infinite linear;
+        }
+
+        /* Polaroid & Layered Photo Cards */
+        .polaroid-card {
+            background: #ffffff;
+            box-shadow: 0 18px 40px -8px rgba(74, 18, 36, 0.22), 0 6px 16px -4px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .polaroid-card:hover {
+            transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: 0 28px 50px -10px rgba(74, 18, 36, 0.35);
+            z-index: 35;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F9ECE8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D89B93;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4A1224;
+        }
+
+        /* Glassmorphism panels */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .glass-plum {
+            background: rgba(74, 18, 36, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(228, 181, 172, 0.3);
+        }
+
+        /* Gold Gradient Borders */
+        .gold-border {
+            border-image: linear-gradient(135deg, #D4AF37, #F3DDD6, #C5A059) 1;
+        }
+
+        /* Floating animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+        
+    </style>
+</head>
+<body class="bg-[#FDF8F6] text-luxuryDark font-sans antialiased selection:bg-plumDark selection:text-white min-h-screen flex flex-col">
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-3 pointer-events-none"></div>
+
+    <!-- 2. LUXURY HEADER -->
+    <header id="mainHeader" class="bg-[#FDF8F6]/90 backdrop-blur-md sticky top-0 z-40 transition-all duration-300 border-b border-roseLight/60 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4">
+            <div class="grid grid-cols-3 items-center">
+                <!-- Left Space / Brand Badge -->
+                <div class="flex items-center space-x-3 text-xs tracking-widest uppercase font-medium text-gray-600 hidden sm:flex">
+                </div>
+
+                <!-- Centered Logo -->
+                <div class="text-center relative group cursor-pointer select-none col-span-3 sm:col-span-1" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                    <span class="font-serif text-[8px] sm:text-[9px] tracking-[0.55em] text-plumMedium uppercase block font-bold mb-0">MAISON</span>
+                    <h1 class="font-pinyon text-4xl sm:text-6xl text-plumDark leading-none block font-normal tracking-wide transform group-hover:scale-105 transition duration-500 py-0.5">
+                        Roséline
+                    </h1>
+                </div>
+
+                <!-- Right Utility Icons -->
+                <div class="flex items-center justify-end space-x-5 text-luxuryDark col-span-3 sm:col-span-1 mt-2 sm:mt-0">
+                    <button id="searchBtn" class="hover:text-plumDark transition text-base p-2 focus:outline-none relative group" title="Rechercher">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-plumDark text-white text-[9px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">Rechercher</span>
+                    </button>
+
+                    <button id="wishlistBtn" class="hover:text-plumDark transition text-base p-2 relative focus:outline-none group" title="Favoris">
+                        <i class="fa-regular fa-heart"></i>
+                        <span id="wishlistCount" class="absolute top-0 right-0 bg-plumDark text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                        <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-plumDark text-white text-[9px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">Mes Favoris</span>
+                    </button>
+
+                    <button id="cartBtn" class="bg-plumDark hover:bg-plumMedium text-white px-3.5 py-2 rounded-full text-xs transition duration-300 flex items-center space-x-2 shadow-md hover:shadow-lg focus:outline-none relative">
+                        <i class="fa-solid fa-bag-shopping text-goldChampagne text-sm"></i>
+                        <span class="hidden md:inline font-medium tracking-wider uppercase text-[11px]">Panier</span>
+                        <span id="cartCount" class="bg-goldChampagne text-plumDark text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold ml-1">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <nav class="mt-4 pt-3 border-t border-roseLight/50 flex justify-center flex-wrap gap-4 sm:gap-8 text-xs tracking-[0.22em] uppercase font-medium text-luxuryDark/80">
+                <a href="#home" class="hover:text-plumDark border-b-2 border-plumDark pb-1 transition font-semibold text-plumDark">Accueil</a>
+                <a href="#catalog" class="hover:text-plumDark border-b-2 border-transparent hover:border-plumDark pb-1 transition">Nos Bouquets</a>
+                <a href="#coffrets" class="hover:text-plumDark border-b-2 border-transparent hover:border-plumDark pb-1 transition">Coffrets & Cadeaux</a>
+                <a href="#custom-card" class="hover:text-plumDark border-b-2 border-transparent hover:border-plumDark pb-1 transition">Message Personnalisé</a>
+                <a href="#about" class="hover:text-plumDark border-b-2 border-transparent hover:border-plumDark pb-1 transition">Notre Histoire</a>
+                <a href="#footer" class="hover:text-plumDark border-b-2 border-transparent hover:border-plumDark pb-1 transition">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="relative bg-gradient-to-b from-[#FAF0EE] via-[#F3DDD6] to-[#FDF8F6] py-12 md:py-20 px-4 sm:px-8 overflow-hidden">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-roseGold/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-plumDark/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[560px]">
+
+                    <div class="lg:col-span-5 space-y-6 text-center lg:text-left z-20">
+                        <div class="inline-flex items-center space-x-2 bg-white/80 backdrop-blur px-3.5 py-1.5 rounded-full border border-roseGold/40 shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-goldWarm animate-pulse"></span>
+                            <span class="text-[10px] sm:text-xs font-serif tracking-[0.3em] uppercase text-plumDark font-semibold">
+                                L'ART D'OFFRIR DES FLEURS
+                            </span>
+                        </div>
+
+                        <h1 class="font-bodoni text-4xl sm:text-6xl lg:text-6xl font-light text-luxuryDark leading-[1.15] tracking-tight">
+                            Des fleurs qui <br class="hidden sm:inline">
+                            <span class="font-pinyon text-5xl sm:text-7xl lg:text-8xl text-plumDark block sm:inline font-normal -mt-2 sm:mt-0">parlent au cœur.</span>
+                        </h1>
+
+                        <p class="font-sans text-xs sm:text-sm text-luxuryDark/80 leading-relaxed font-light max-w-lg mx-auto lg:mx-0">
+                            Découvrez des compositions florales d'exception et des coffrets couture façonnés à la main dans notre atelier pour poétiser vos plus beaux moments.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#catalog" class="w-full sm:w-auto bg-plumDark text-white hover:bg-plumMedium px-8 py-4 text-xs tracking-[0.25em] uppercase font-medium transition duration-300 shadow-xl hover:shadow-2xl text-center border border-plumDark">
+                                Découvrir la Collection
+                            </a>
+                            <button onclick="openVideoModal()" class="w-full sm:w-auto bg-white/90 text-plumDark hover:bg-plumDark hover:text-white px-6 py-4 text-xs tracking-[0.22em] uppercase font-medium transition duration-300 border border-plumDark/30 text-center flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-play text-[10px] text-goldWarm"></i>
+                                <span>Notre Univers</span>
+                            </button>
+                        </div>
+
+                        <div class="pt-6 border-t border-roseGold/30 grid grid-cols-3 gap-2 text-center text-luxuryDark/80 text-[10px] sm:text-xs font-medium uppercase tracking-wider">
+                            <div class="flex flex-col items-center">
+                                <i class="fa-solid fa-seedling text-plumDark text-sm mb-1"></i>
+                                <span>100% Fleurs Fraîches</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <i class="fa-solid fa-truck-fast text-plumDark text-sm mb-1"></i>
+                                <span>Livraison 24h</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <i class="fa-solid fa-ribbon text-plumDark text-sm mb-1"></i>
+                                <span>Savoir-Faire Artisanal</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 relative flex justify-center items-center py-6 lg:py-0">
+                        <div class="w-72 sm:w-96 lg:w-[420px] aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative upload-slot group cursor-pointer border-4 border-white/80 z-20" data-slot-id="hero-main">
+                            <img class="target-img w-full h-full object-cover transition duration-700 group-hover:scale-105" src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=1000&q=80" alt="Création florale Roséline">
+                            <div class="absolute inset-0 bg-gradient-to-t from-plumDark/80 via-black/10 to-transparent pointer-events-none flex flex-col justify-end p-6 text-white">
+                                <span class="font-pinyon text-4xl sm:text-5xl text-roseGold drop-shadow">Édition Limitée</span>
+                                <h3 class="font-bodoni text-xl sm:text-2xl tracking-[0.2em] font-light uppercase">Collection Printemps</h3>
+                                <p class="text-[10px] tracking-widest text-white/80 uppercase font-light mt-1">Conception sur-mesure</p>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-plumDark/80 backdrop-blur text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 text-xs" title="Cliquer pour changer l'image">
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
+                            <input type="file" class="file-input hidden" accept="image/*">
+                        </div>
+
+                        <div class="polaroid-card p-3 pb-7 w-40 sm:w-48 lg:w-52 rotate-[6deg] rounded-md upload-slot group cursor-pointer absolute -top-4 -right-2 sm:right-4 z-30 shadow-xl hidden sm:block" data-slot-id="hero-polaroid-1">
+                            <div class="aspect-[3/4] bg-rosePowder overflow-hidden relative border border-gray-100 rounded">
+                                <img class="target-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" alt="Roses Poudrées">
+                                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white text-xs">
+                                    <i class="fa-solid fa-camera text-base"></i>
+                                </div>
+                            </div>
+                            <p class="font-pinyon text-xl text-center text-plumDark mt-2">Le Rose Poudré</p>
+                            <input type="file" class="file-input hidden" accept="image/*">
+                        </div>
+
+                        <div class="polaroid-card p-3 pb-7 w-40 sm:w-48 lg:w-52 rotate-[-7deg] rounded-md upload-slot group cursor-pointer absolute -bottom-4 -left-2 sm:left-4 z-30 shadow-xl" data-slot-id="hero-polaroid-2">
+                            <div class="aspect-[4/3] bg-rosePowder overflow-hidden relative border border-gray-100 rounded">
+                                <img class="target-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80" alt="Pivoines Impériales">
+                                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white text-xs">
+                                    <i class="fa-solid fa-camera text-base"></i>
+                                </div>
+                            </div>
+                            <p class="font-pinyon text-xl text-center text-plumDark mt-2">Pivoines de Paris</p>
+                            <input type="file" class="file-input hidden" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+      
+
+
+        <!-- 5. PRODUCT CATALOG SECTION -->
+        <section id="catalog" class="py-16 bg-[#FAF0EE] border-t border-b border-roseLight/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8">
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-roseLight">
+                    <div>
+                        <span class="font-pinyon text-4xl text-plumDark block">Inspirations Florales</span>
+                        <h2 class="font-bodoni text-2xl sm:text-3xl text-luxuryDark tracking-[0.2em] uppercase font-normal mt-1">
+                            NOS CRÉATIONS INCONTOURNABLES
+                        </h2>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="flex items-center space-x-2 sm:space-x-3 mt-6 md:mt-0 overflow-x-auto pb-2 md:pb-0 text-xs tracking-wider uppercase font-medium">
+                        <button onclick="filterCategory('all')" class="cat-tab px-4 py-2 rounded-full bg-plumDark text-white transition whitespace-nowrap" data-cat="all">Tout</button>
+                        <button onclick="filterCategory('bouquets')" class="cat-tab px-4 py-2 rounded-full bg-white text-luxuryDark hover:bg-rosePowder transition whitespace-nowrap" data-cat="bouquets">Bouquets de Fleurs</button>
+                        <button onclick="filterCategory('bouquets')" class="cat-tab px-4 py-2 rounded-full bg-white text-luxuryDark hover:bg-rosePowder transition whitespace-nowrap" data-cat="bouquets">Bouquets Romantiques</button>
+                        <button onclick="filterCategory('parfums')" class="cat-tab px-4 py-2 rounded-full bg-white text-luxuryDark hover:bg-rosePowder transition whitespace-nowrap" data-cat="parfums">Parfums de Luxe</button>
+                        <button onclick="filterCategory('bouquets')" class="cat-tab px-4 py-2 rounded-full bg-white text-luxuryDark hover:bg-rosePowder transition whitespace-nowrap" data-cat="bouquets">Bouquets Signature</button>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Products dynamically rendered by JS -->
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 6. CUSTOM GIFT MESSAGE CARD -->
+        <section id="custom-card" class="py-20 max-w-6xl mx-auto px-4 sm:px-8">
+            <div class="bg-white rounded-2xl p-6 sm:p-12 shadow-xl border border-roseLight/80 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="font-pinyon text-4xl text-plumDark block">L'Attention Particulière</span>
+                    <h3 class="font-bodoni text-2xl sm:text-3xl tracking-[0.15em] text-luxuryDark uppercase font-normal">
+                        VOTRE MESSAGE PERSONNALISÉ
+                    </h3>
+                    <p class="text-xs text-luxuryDark/80 leading-relaxed font-light">
+                        Chaque création Roséline est accompagnée d'une carte d'art imprimée sur papier création avec dorure à chaud, scellée à la cire dans notre atelier.
+                    </p>
+
+                    <form id="giftCardForm" class="space-y-3 pt-2" onsubmit="event.preventDefault(); applyGiftCardMessage();">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-plumDark font-semibold mb-1">Nom du Destinataire</label>
+                            <input type="text" id="giftTo" placeholder="Ex: Chère Éléonore" class="w-full text-xs border border-roseLight p-2.5 rounded focus:outline-none focus:border-plumDark bg-rosePowder/30">
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-plumDark font-semibold mb-1">Votre Message Poétique</label>
+                            <textarea id="giftMessage" rows="3" placeholder="Que ces fleurs apportent douceur et poésie à votre journée..." class="w-full text-xs border border-roseLight p-2.5 rounded focus:outline-none focus:border-plumDark bg-rosePowder/30"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-plumDark font-semibold mb-1">Signature</label>
+                            <input type="text" id="giftFrom" placeholder="Ex: Avec tout mon amour" class="w-full text-xs border border-roseLight p-2.5 rounded focus:outline-none focus:border-plumDark bg-rosePowder/30">
+                        </div>
+
+                        <button type="submit" class="w-full bg-plumDark text-white py-3 text-xs tracking-[0.2em] uppercase font-medium hover:bg-plumMedium transition shadow-md">
+                            Valider le mot doux
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Preview Card -->
+                <div class="lg:col-span-7 flex justify-center">
+                    <div class="w-full max-w-md bg-[#FAF0EE] border-2 border-goldWarm/40 p-8 rounded-xl shadow-2xl relative text-center flex flex-col justify-between min-h-[320px]">
+                        <div class="absolute top-3 left-3 right-3 flex justify-between items-center opacity-40 text-[9px] font-bodoni uppercase tracking-widest text-plumDark">
+                            <span>Maison Roséline</span>
+                            <span>Paris 8e</span>
+                        </div>
+
+                        <div class="my-auto space-y-4 py-4">
+                            <span class="font-serif text-xs text-goldWarm italic tracking-widest block" id="previewTo">Chère Éléonore,</span>
+                            <p class="font-serif italic text-sm text-luxuryDark leading-relaxed px-4" id="previewMessage">
+                                "Que ces fleurs apportent toute la douceur et la magie d'un printemps parisien..."
+                            </p>
+                            <span class="font-pinyon text-2xl text-plumDark block" id="previewFrom">Avec tout mon amour</span>
+                        </div>
+
+                        <div class="pt-2 border-t border-roseLight/60 flex justify-center items-center space-x-2">
+                            <span class="w-3 h-3 rounded-full bg-plumDark border border-goldWarm inline-block"></span>
+                            <span class="text-[9px] uppercase tracking-[0.3em] text-plumDark font-semibold">Scellé à la cire rouge Roséline</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 7. BRAND STORYTELLING -->
+        <section id="about" class="bg-plumDark text-white py-20 px-6 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="font-pinyon text-5xl text-roseGold block">Maison Roséline</span>
+                    <h2 class="font-bodoni text-3xl sm:text-4xl tracking-[0.2em] uppercase font-light text-white">
+                        LE SAVOIR-FAIRE & LA PASSION
+                    </h2>
+                    <p class="text-xs sm:text-sm text-white/80 leading-relaxed font-light">
+                        Depuis notre atelier, nous sublimons les fleurs locales et de saison. Chaque tige est sélectionnée avec précaution pour composer des créations vivantes d'une grâce absolue.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 text-center pt-2">
+                        <div class="p-4 bg-plumMedium/50 rounded-lg border border-roseGold/20">
+                            <span class="font-bodoni text-2xl text-goldChampagne font-bold block">+15 000</span>
+                            <span class="text-[10px] uppercase tracking-widest text-white/70">Sourires Livrés</span>
+                        </div>
+                        <div class="p-4 bg-plumMedium/50 rounded-lg border border-roseGold/20">
+                            <span class="font-bodoni text-2xl text-goldChampagne font-bold block">100%</span>
+                            <span class="text-[10px] uppercase tracking-widest text-white/70">Artisanal & Frais</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-center">
+                    <div class="w-full max-w-sm aspect-[4/5] rounded-xl overflow-hidden border-2 border-goldWarm/50 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Artisan Fleuriste Roséline">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 8. REVIEWS & PRESS -->
+        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="text-center mb-12">
+                <span class="font-pinyon text-4xl text-plumDark block">Témoignages & Presse</span>
+                <h2 class="font-bodoni text-2xl sm:text-3xl text-luxuryDark tracking-[0.2em] uppercase font-normal mt-1">
+                    CE QU'ELLES DISENT DE NOUS
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl border border-roseLight shadow-sm space-y-3">
+                    <div class="text-goldWarm text-xs flex space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-serif italic text-xs text-luxuryDark leading-relaxed">
+                        "Les fleurs sont arrivées impeccables, d'une fraîcheur incroyable. Le packaging avec la cire et le ruban est un vrai chef-d'œuvre."
+                    </p>
+                    <span class="text-[10px] uppercase tracking-widest text-plumDark font-semibold block pt-2 border-t border-roseLight">— Camélia D.</span>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-roseLight shadow-sm space-y-3">
+                    <div class="text-goldWarm text-xs flex space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-serif italic text-xs text-luxuryDark leading-relaxed">
+                        "Le coffret de pivoines pour l'anniversaire de ma mère a fait un effet prodigieux. Service client de très grande classe."
+                    </p>
+                    <span class="text-[10px] uppercase tracking-widest text-plumDark font-semibold block pt-2 border-t border-roseLight">— Charlotte M.</span>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-roseLight shadow-sm space-y-3">
+                    <div class="text-goldWarm text-xs flex space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-serif italic text-xs text-luxuryDark leading-relaxed">
+                        "Une poésie visuelle et olfactive rare. Bravo aux artisans fleuristes !"
+                    </p>
+                    <span class="text-[10px] uppercase tracking-widest text-plumDark font-semibold block pt-2 border-t border-roseLight">— Avis client</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- 9. FOOTER -->
+    <footer id="footer" class="bg-luxuryDark text-white/80 py-16 px-6 border-t border-plumMedium">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 text-xs">
+
+            <div class="space-y-3">
+                <span class="font-pinyon text-4xl text-roseGold block">Roséline</span>
+                <p class="text-gray-400 font-light leading-relaxed">
+                    Des bouquets de fleurs et des parfums pour célébrer les plus beaux moments.
+                </p>
+                <div class="flex space-x-4 text-base text-roseGold pt-2">
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-pinterest-p"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bodoni text-xs tracking-[0.25em] text-white uppercase mb-4 border-b border-white/10 pb-2">Collections</h4>
+                <ul class="space-y-2.5 text-gray-400 font-light">
+                    <li><a href="#catalog" class="hover:text-roseGold transition">Bouquets de fleurs</a></li>
+                    <li><a href="#catalog" class="hover:text-roseGold transition">Bouquets romantiques</a></li>
+                    <li><a href="#catalog" class="hover:text-roseGold transition">Parfums de luxe</a></li>
+                    <li><a href="#catalog" class="hover:text-roseGold transition">Bouquets signature</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bodoni text-xs tracking-[0.25em] text-white uppercase mb-4 border-b border-white/10 pb-2">Service client</h4>
+                <ul class="space-y-2.5 text-gray-400 font-light">
+                    <li><a href="#" class="hover:text-roseGold transition">Livraison</a></li>
+                    <li><a href="#" class="hover:text-roseGold transition">Commandes personnalisées</a></li>
+                    <li><a href="#" class="hover:text-roseGold transition">Conseils d'entretien</a></li>
+                    <li><a href="#" class="hover:text-roseGold transition">Nous contacter</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bodoni text-xs tracking-[0.25em] text-white uppercase mb-4 border-b border-white/10 pb-2">Contact</h4>
+                <p class="text-gray-400 font-light leading-relaxed space-y-1">
+                    <span>📍 Algérie</span><br>
+                    <span class="text-roseGold">Service client Roséline</span><br>
+                    <span>✉️ contact@roseline.com</span>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center text-[10px] text-gray-500 font-light">
+            <p>© 2026 Roséline. Tous droits réservés.</p>
+            <div class="flex space-x-4 mt-3 sm:mt-0">
+                <span>Mentions légales</span>
+                <span>Politique de confidentialité</span>
+                <span>Conditions générales</span>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ================= MODALS & SLIDE-OVER DRAWERS ================= -->
+
+    <!-- SLIDE-OVER CART DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="cartPanel" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+
+            <!-- Drawer Header -->
+            <div class="p-5 border-b border-roseLight bg-rosePowder flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-bag-shopping text-plumDark"></i>
+                    <h3 class="font-bodoni text-sm tracking-widest text-plumDark uppercase font-semibold">Mon Panier Roséline</h3>
+                </div>
+                <button onclick="closeCart()" class="text-gray-500 hover:text-plumDark text-lg focus:outline-none">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Free Shipping Progress Bar -->
+            <div class="bg-plumDark text-white p-3 text-center text-[11px]">
+                <p id="freeShippingText">Livraison offerte à partir de 10 000 DA</p>
+                <div class="w-full bg-plumMedium h-1.5 rounded-full mt-2 overflow-hidden">
+                    <div id="freeShippingBar" class="bg-goldChampagne h-full transition-all duration-500" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItemsList" class="p-5 flex-grow overflow-y-auto space-y-4">
+                <!-- Items populated by JS -->
+            </div>
+                            <!-- Items populated by JS -->
+            </div>
+
+            <!-- Promo & Checkout Summary -->
+            <div class="p-5 border-t border-roseLight bg-[#FAF0EE] space-y-3">
+                <div class="flex space-x-2">
+                    <input type="text" id="promoInput" placeholder="Code promo" class="w-full text-xs uppercase px-3 py-2 border border-roseLight rounded focus:outline-none focus:border-plumDark">
+                    <button onclick="applyPromo()" class="bg-plumDark text-white px-4 text-xs tracking-wider uppercase hover:bg-plumMedium transition">Appliquer</button>
+                </div>
+                <div id="promoMessage" class="text-[11px] font-medium hidden"></div>
+
+                <div class="space-y-1.5 text-xs text-luxuryDark pt-2">
+                    <div class="flex justify-between">
+                        <span>Sous-total</span>
+                        <span id="cartSubtotal">0 DA</span>
+                    </div>
+                    <div id="discountRow" class="flex justify-between text-plumDark hidden font-semibold">
+                        <span>Remise Code (-20%)</span>
+                        <span id="discountValue">0 DA</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Livraison estimée</span>
+                        <span id="cartShipping">Offerte</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-bold pt-2 border-t border-roseLight text-plumDark">
+                        <span>Total TTC</span>
+                        <span id="cartTotal">0 DA</span>
+                    </div>
+                </div>
+
+                <button onclick="mockCheckout()" class="w-full bg-plumDark hover:bg-plumMedium text-white py-3.5 text-xs tracking-[0.2em] uppercase font-semibold transition duration-300 shadow-lg">
+                    Passer la commande
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK VIEW MODAL -->
+    <div id="quickViewModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative border border-roseLight overflow-hidden max-h-[90vh] overflow-y-auto">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 text-gray-400 hover:text-plumDark text-xl z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="aspect-square bg-rosePowder rounded-lg overflow-hidden">
+                    <img id="qvImage" src="" class="w-full h-full object-cover" alt="Aperçu du produit">
+                </div>
+
+                <div class="space-y-4 flex flex-col justify-between">
+                    <div>
+                        <span id="qvCategory" class="text-[10px] tracking-widest uppercase font-semibold text-goldWarm block">Catégorie</span>
+                        <h3 id="qvTitle" class="font-bodoni text-xl text-luxuryDark font-normal">Nom du produit</h3>
+                        <div class="text-goldWarm text-xs mt-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            (5.0)
+                        </div>
+                        <p id="qvPrice" class="text-base font-bold text-plumDark mt-2">0 DA</p>
+                        <p id="qvDesc" class="text-xs text-gray-600 mt-2 leading-relaxed"></p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider font-semibold text-plumDark mb-1">Format</label>
+                            <select id="qvSize" class="w-full border border-roseLight text-xs p-2 rounded focus:outline-none focus:border-plumDark">
+                                <option>Taille classique</option>
+                                <option>Taille prestige (+3 000 DA)</option>
+                                <option>Grand luxe (+6 000 DA)</option>
+                            </select>
+                        </div>
+
+                        <button id="qvAddToCartBtn" class="w-full bg-plumDark text-white py-3 text-xs tracking-widest uppercase font-semibold hover:bg-plumMedium transition shadow">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH MODAL -->
+    <div id="searchModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex items-start justify-center pt-20 px-4">
+        <div class="bg-white w-full max-w-xl p-6 rounded-2xl shadow-2xl relative border border-roseLight">
+            <button onclick="closeSearch()" class="absolute top-4 right-4 text-gray-400 hover:text-plumDark text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="font-bodoni text-lg tracking-widest text-plumDark uppercase mb-4 font-semibold">Rechercher un article</h3>
+
+            <div class="relative">
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Rechercher un bouquet ou un parfum..." class="w-full border border-roseLight py-3 pl-4 pr-10 text-xs rounded focus:outline-none focus:border-plumDark">
+                <i class="fa-solid fa-magnifying-glass absolute right-3 top-3.5 text-plumDark"></i>
+            </div>
+
+            <div id="searchResults" class="mt-4 max-h-60 overflow-y-auto space-y-2 text-xs"></div>
+        </div>
+    </div>
+
+    <!-- VIDEO MODAL -->
+    <div id="videoModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+        <div class="bg-plumDark text-white w-full max-w-2xl p-8 rounded-2xl relative text-center space-y-4 border border-roseGold/30">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 text-white/70 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <span class="font-pinyon text-4xl text-roseGold block">L'univers Roséline</span>
+            <h3 class="font-bodoni text-2xl uppercase tracking-widest">Notre passion florale</h3>
+
+            <div class="aspect-video bg-black/40 rounded-lg flex items-center justify-center border border-roseGold/20">
+                <div class="text-center p-6 space-y-2">
+                    <i class="fa-solid fa-film text-4xl text-goldChampagne mb-2"></i>
+                    <p class="text-xs text-white/80">Découvrez notre univers floral et nos créations parfumées.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // DONNÉES DES PRODUITS
+        const products = [
+            {
+                id: 1,
+                name: "Bouquet de roses poudrées",
+                category: "bouquets",
+                price: 8500,
+                badge: "Bestseller",
+                img: "https://ecoroses.com/cdn/shop/files/DSC02107_resized.webp?v=1771879909&width=2560",
+                desc: "Un bouquet généreux de roses roses et de feuillage délicat, idéal pour une attention romantique."
+            },
+            {
+                id: 2,
+                name: "Bouquet prestige roses et pivoines",
+                category: "bouquets",
+                price: 14500,
+                badge: "Édition limitée",
+                img: "https://www.milijonasroziu.lt/buket/buket104-min.jpg",
+                desc: "Une composition raffinée de roses, pivoines et fleurs de saison dans des tons rose poudré."
+            },
+            {
+                id: 3,
+                name: "Bouquet romantique rose et crème",
+                category: "bouquets",
+                price: 7200,
+                badge: "Nouveauté",
+                img: "https://www.middlemist.co.uk/upload/mt/mfs1090/products/th_null-100-pink-roses-bouquet.jpg",
+                desc: "Des roses aux nuances rose tendre et crème, soigneusement assemblées pour offrir un cadeau élégant."
+            },
+            {
+                id: 4,
+                name: "Bouquet de roses pastel",
+                category: "bouquets",
+                price: 9900,
+                badge: "Coup de cœur",
+                img: "https://abrakadabra.fun/uploads/posts/2021-12/1640318767_21-abrakadabra-fun-p-samie-shikarnie-buketi-tsvetov-24.jpg",
+                desc: "Un bouquet de roses pastel et de petites fleurs décoratives, parfait pour une occasion spéciale."
+            },
+            {
+                id: 5,
+                name: "Bouquet pivoines et roses élégance",
+                category: "bouquets",
+                price: 12500,
+                badge: "Premium",
+                img: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=900&q=85",
+                desc: "Une composition florale généreuse aux couleurs douces, idéale pour un anniversaire."
+            },
+            {
+    id: 6,
+    name: "Chanel Coco Mademoiselle",
+    category: "parfums",
+    price: 38000,
+    badge: "Parfum iconique",
+    img: "https://www.poudrine.com/cdn/shop/files/207189-chanel-coco-mademoiselle-eau-de-parfum-vaporisateur-35-ml-1000x1000_2e95fead-dd73-42a9-9371-4773b7cab931.jpg?v=1741283095",
+    desc: "Un parfum féminin aux notes d'agrumes, de rose, de jasmin et de patchouli."
+},
+            {
+                id: 7,
+                name: "Yves Saint Laurent Libre",
+                category: "parfums",
+                price: 32000,
+                badge: "Best-seller",
+                img: "https://www.yslbeauty.com.sg/dw/image/v2/BFZM_PRD/on/demandware.static/-/Sites-ysl-master-catalog/en_SG/dw7700fbd2/square/Fragrance/Libre_EDP/3614272648425_libre_eau_de_parfum_90ml.jpg?q=85&sfrm=jpg&sw=724",
+                desc: "Une fragrance florale et ambrée associant la lavande, la fleur d'oranger et la vanille."
+            },
+            {
+                id: 8,
+                name: "Miss Dior Eau de Parfum",
+                category: "parfums",
+                price: 35000,
+                badge: "Élégance",
+                img: "https://perfumeworld.com.bd/images/thumbs/0000730_miss-dior-edp_625.jpeg",
+                desc: "Une fragrance féminine aux accents floraux et fruités, présentée dans un flacon rose."
+            }
+        ];
+
+        // ÉTAT DU SITE
+        let cart = [];
+        let wishlistCountVal = 0;
+        let appliedPromoCode = null;
+
+        // FORMATAGE DES PRIX EN DINARS ALGÉRIENS
+        function formatDZD(value) {
+            return new Intl.NumberFormat('fr-DZ', {
+                maximumFractionDigits: 0
+            }).format(Math.round(value)) + ' DA';
+        }
+
+        // AFFICHER LES PRODUITS
+        function renderProducts(filterCat = 'all') {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            const filtered = filterCat === 'all'
+                ? products
+                : products.filter(p => p.category === filterCat);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+
+                card.className = "bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-roseLight/60 flex flex-col justify-between group relative";
+
+                card.innerHTML = `
+                    <div class="aspect-[4/5] bg-rosePowder overflow-hidden relative upload-slot cursor-pointer" data-slot-id="product-${p.id}">
+                        <img src="${p.img}" class="target-img w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="${p.name}">
+
+                        <span class="absolute top-3 left-3 bg-plumDark text-white text-[9px] uppercase tracking-widest px-2.5 py-1 rounded-full font-semibold shadow">${p.badge}</span>
+
+                        <button onclick="toggleWishlist(event, this)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 text-luxuryDark hover:text-plumDark flex items-center justify-center transition shadow-sm z-10" title="Ajouter aux favoris">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                        <button onclick="openQuickView(${p.id})" class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur text-plumDark hover:bg-plumDark hover:text-white px-4 py-2 text-[10px] uppercase tracking-widest font-semibold rounded-full opacity-0 group-hover:opacity-100 transition duration-300 shadow-md whitespace-nowrap z-10">
+                            Aperçu rapide
+                        </button>
+
+                        <input type="file" class="file-input hidden" accept="image/*">
+                    </div>
+
+                    <div class="p-5 flex flex-col justify-between flex-grow text-center">
+                        <div>
+                            <span class="text-[9px] uppercase tracking-widest text-goldWarm font-bold block mb-1">${p.category}</span>
+                            <h4 class="font-bodoni text-sm font-semibold text-luxuryDark group-hover:text-plumDark transition">${p.name}</h4>
+                            <div class="text-goldWarm text-[10px] mt-1">
+                                ★★★★★
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-roseLight/50 flex items-center justify-between">
+                            <span class="text-sm font-bold text-plumDark">${formatDZD(p.price)}</span>
+                            <button onclick="addToCart(${p.id})" class="bg-plumDark hover:bg-plumMedium text-white text-[10px] uppercase tracking-widest px-3.5 py-2 rounded-full font-semibold transition flex items-center space-x-1 shadow">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Ajouter</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+
+            initUploadSlots();
+        }
+
+        // FILTRER LES CATÉGORIES
+        function filterCategory(cat) {
+            document.querySelectorAll('.cat-tab').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = "cat-tab px-4 py-2 rounded-full bg-plumDark text-white transition whitespace-nowrap font-semibold";
+                } else {
+                    btn.className = "cat-tab px-4 py-2 rounded-full bg-white text-luxuryDark hover:bg-rosePowder transition whitespace-nowrap";
+                }
+            });
+
+            renderProducts(cat);
+        }
+                // AJOUTER AU PANIER
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCart();
+            showToast(product.name + " ajouté au panier.");
+        }
+
+        // METTRE À JOUR LE PANIER
+        function updateCart() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            document.getElementById('cartCount').textContent = count;
+
+            const list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
+
+            if (cart.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-bag-shopping text-4xl mb-4"></i>
+                        <p class="font-serif italic text-sm">Votre panier est encore vide.</p>
+                        <button onclick="closeCart(); document.getElementById('catalog').scrollIntoView({behavior:'smooth'});" class="mt-4 text-xs text-plumDark underline">
+                            Découvrir la collection
+                        </button>
+                    </div>
+                `;
+            }
+
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+
+                const row = document.createElement('div');
+                row.className = "flex gap-3 border-b border-roseLight pb-4";
+
+                row.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}" class="w-20 h-24 object-cover rounded-lg bg-rosePowder">
+
+                    <div class="flex-grow">
+                        <h4 class="font-bodoni text-sm text-plumDark font-semibold">${item.name}</h4>
+
+                        <p class="text-xs text-gray-500 mt-1">${formatDZD(item.price)}</p>
+
+                        <div class="flex items-center gap-3 mt-3">
+                            <button onclick="changeQuantity(${item.id}, -1)" class="w-6 h-6 border border-roseLight rounded-full">−</button>
+                            <span class="text-xs">${item.quantity}</span>
+                            <button onclick="changeQuantity(${item.id}, 1)" class="w-6 h-6 border border-roseLight rounded-full">+</button>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <p class="text-xs font-bold text-plumDark">${formatDZD(item.price * item.quantity)}</p>
+                        <button onclick="removeFromCart(${item.id})" class="text-[10px] text-gray-400 hover:text-red-600 mt-3">
+                            Supprimer
+                        </button>
+                    </div>
+                `;
+
+                list.appendChild(row);
+            });
+
+            const freeShippingThreshold = 10000;
+            const remaining = Math.max(0, freeShippingThreshold - subtotal);
+            const progress = Math.min(100, (subtotal / freeShippingThreshold) * 100);
+
+            document.getElementById('freeShippingBar').style.width = progress + '%';
+
+            document.getElementById('freeShippingText').innerHTML =
+                remaining === 0
+                    ? '<strong>Livraison offerte !</strong>'
+                    : 'Ajoutez ' + formatDZD(remaining) + ' pour bénéficier de la livraison offerte.';
+
+            const shipping = subtotal === 0 || subtotal >= freeShippingThreshold ? 0 : 800;
+            const discount = appliedPromoCode === 'ROSELINE20' ? subtotal * 0.20 : 0;
+            const total = Math.max(0, subtotal - discount) + shipping;
+
+            document.getElementById('cartSubtotal').textContent = formatDZD(subtotal);
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'Offerte' : formatDZD(shipping);
+            document.getElementById('cartTotal').textContent = formatDZD(total);
+
+            document.getElementById('discountRow').classList.toggle('hidden', discount === 0);
+            document.getElementById('discountValue').textContent = '-' + formatDZD(discount);
+        }
+
+        // MODIFIER LA QUANTITÉ
+        function changeQuantity(productId, change) {
+            const item = cart.find(p => p.id === productId);
+            if (!item) return;
+
+            item.quantity += change;
+
+            if (item.quantity <= 0) {
+                cart = cart.filter(p => p.id !== productId);
+            }
+
+            updateCart();
+        }
+
+        // SUPPRIMER UN ARTICLE
+        function removeFromCart(productId) {
+            cart = cart.filter(p => p.id !== productId);
+            updateCart();
+            showToast("Article supprimé du panier.");
+        }
+
+        // OUVRIR / FERMER LE PANIER
+        function openCart() {
+            const drawer = document.getElementById('cartDrawer');
+            const panel = document.getElementById('cartPanel');
+
+            drawer.classList.remove('opacity-0', 'pointer-events-none');
+            panel.classList.remove('translate-x-full');
+
+            updateCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cartDrawer').classList.add('opacity-0', 'pointer-events-none');
+            document.getElementById('cartPanel').classList.add('translate-x-full');
+        }
+
+        // CODE PROMOTIONNEL
+        function applyPromo() {
+            const input = document.getElementById('promoInput');
+            const message = document.getElementById('promoMessage');
+            const code = input.value.trim().toUpperCase();
+
+            message.classList.remove('hidden', 'text-green-700', 'text-red-600');
+
+            if (code === 'ROSELINE20') {
+                appliedPromoCode = code;
+                message.textContent = 'Code accepté : réduction de 20 %.';
+                message.classList.add('text-green-700');
+            } else {
+                appliedPromoCode = null;
+                message.textContent = 'Code promo invalide.';
+                message.classList.add('text-red-600');
+            }
+
+            updateCart();
+        }
+
+        // APERÇU RAPIDE
+        function openQuickView(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('qvImage').src = product.img;
+            document.getElementById('qvTitle').textContent = product.name;
+            document.getElementById('qvCategory').textContent = product.category === 'bouquets' ? 'Bouquet de fleurs' : 'Parfum de luxe';
+            document.getElementById('qvPrice').textContent = formatDZD(product.price);
+            document.getElementById('qvDesc').textContent = product.desc;
+
+            document.getElementById('qvAddToCartBtn').onclick = () => {
+                addToCart(productId);
+                closeQuickView();
+            };
+
+            const modal = document.getElementById('quickViewModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // RECHERCHE
+        function openSearch() {
+            const modal = document.getElementById('searchModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            document.getElementById('searchInput').focus();
+        }
+
+        function closeSearch() {
+            document.getElementById('searchModal').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '';
+
+            if (!query) return;
+
+            const matches = products.filter(p =>
+                p.name.toLowerCase().includes(query) ||
+                p.category.toLowerCase().includes(query) ||
+                p.desc.toLowerCase().includes(query)
+            );
+
+            if (matches.length === 0) {
+                results.innerHTML = '<p class="text-gray-500 py-3">Aucun produit trouvé.</p>';
+                return;
+            }
+
+            matches.forEach(p => {
+                const item = document.createElement('button');
+
+                item.className = 'w-full flex items-center gap-3 p-2 hover:bg-rosePowder rounded-lg text-left';
+
+                item.innerHTML = `
+                    <img src="${p.img}" alt="${p.name}" class="w-12 h-12 object-cover rounded">
+                    <span class="flex-grow">
+                        <span class="block text-plumDark font-semibold">${p.name}</span>
+                        <span class="block text-gray-500 mt-1">${formatDZD(p.price)}</span>
+                    </span>
+                `;
+
+                item.onclick = () => {
+                    closeSearch();
+                    openQuickView(p.id);
+                };
+
+                results.appendChild(item);
+            });
+        }
+
+        // FAVORIS
+        function toggleWishlist(event, button) {
+            event.stopPropagation();
+
+            const icon = button.querySelector('i');
+            const isActive = icon.classList.contains('fa-solid');
+
+            if (isActive) {
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
+                wishlistCountVal = Math.max(0, wishlistCountVal - 1);
+            } else {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
+                wishlistCountVal++;
+            }
+
+            document.getElementById('wishlistCount').textContent = wishlistCountVal;
+        }
+
+        // MESSAGE PERSONNALISÉ
+        function applyGiftCardMessage() {
+            const to = document.getElementById('giftTo').value.trim();
+            const message = document.getElementById('giftMessage').value.trim();
+            const from = document.getElementById('giftFrom').value.trim();
+
+            document.getElementById('previewTo').textContent = to ? to + ',' : 'Chère destinataire,';
+            document.getElementById('previewMessage').textContent = message ? '"' + message + '"' : '"Un petit mot doux pour vous."';
+            document.getElementById('previewFrom').textContent = from || 'Avec affection';
+
+            showToast('Votre message personnalisé a été mis à jour.');
+        }
+
+        // MODALE UNIVERS
+        function openVideoModal() {
+            document.getElementById('videoModal').classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeVideoModal() {
+            document.getElementById('videoModal').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // NOTIFICATION
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            toast.className = 'bg-plumDark text-white px-5 py-3 rounded-lg shadow-xl text-xs flex items-center gap-3';
+            toast.innerHTML = '<i class="fa-solid fa-check-circle text-goldChampagne"></i>';
+
+            const text = document.createElement('span');
+            text.textContent = message;
+            toast.appendChild(text);
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // CHANGER LES IMAGES DEPUIS L'ORDINATEUR
+        function initUploadSlots() {
+            document.querySelectorAll('.upload-slot').forEach(slot => {
+                if (slot.dataset.uploadReady === 'true') return;
+                slot.dataset.uploadReady = 'true';
+
+                const input = slot.querySelector('.file-input');
+                const img = slot.querySelector('.target-img');
+
+                if (!input || !img) return;
+
+                slot.addEventListener('click', event => {
+                    if (event.target.closest('button')) return;
+                    input.click();
+                });
+
+                input.addEventListener('change', event => {
+                    const file = event.target.files[0];
+                    if (!file) return;
+
+                    if (!file.type.startsWith('image/')) {
+                        showToast('Veuillez sélectionner une image.');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+
+                    reader.onload = e => {
+                        img.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            });
+        }
+
+        // ÉVÉNEMENTS DE NAVIGATION
+        document.getElementById('cartBtn').addEventListener('click', openCart);
+        document.getElementById('searchBtn').addEventListener('click', openSearch);
+
+        document.getElementById('wishlistBtn').addEventListener('click', () => {
+            showToast('Cliquez sur le cœur d’un produit pour gérer vos favoris.');
+        });
+
+        document.getElementById('cartDrawer').addEventListener('click', event => {
+            if (event.target.id === 'cartDrawer') closeCart();
+        });
+
+        document.getElementById('quickViewModal').addEventListener('click', event => {
+            if (event.target.id === 'quickViewModal') closeQuickView();
+        });
+
+        document.getElementById('searchModal').addEventListener('click', event => {
+            if (event.target.id === 'searchModal') closeSearch();
+        });
+
+        document.getElementById('videoModal').addEventListener('click', event => {
+            if (event.target.id === 'videoModal') closeVideoModal();
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                closeCart();
+                closeQuickView();
+                closeSearch();
+                closeVideoModal();
+            }
+        });
+
+        // INITIALISATION
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts('all');
+            updateCart();
+            initUploadSlots();
+        });
+    </script>
+</body>
+</html>
